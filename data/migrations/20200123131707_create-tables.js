@@ -6,7 +6,7 @@ exports.up = function(knex) {
       tbl.string('recipe_name', 120).notNullable();
       tbl.string('instructions', 3000).notNullable();
     })
-    .createTable('inredients', tbl => {
+    .createTable('ingredients', tbl => {
       tbl.increments();
       tbl.string('ingredient_name', 120).notNullable();
     })
@@ -26,7 +26,7 @@ exports.up = function(knex) {
         .inTable('ingredients')
         .onUpdate('CASCADE')
         .onDelete('RESTRICT')
-      tbl.float('quantity')
+      tbl.float('quantity').notNullable();
     })
 };
 
