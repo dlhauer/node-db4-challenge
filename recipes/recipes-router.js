@@ -43,4 +43,32 @@ router.get('/:id/instructions', (req, res) => {
       });
     });
 });
+
+router.post('/', (req, res) => {
+  const recipeData = req.body;
+  Recipes.addRecipe(recipeData)
+    .then(id => {
+      res.status(201).json(id);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        error: 'Failed to save data.'
+      });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  Recipes.remove(id)
+    .then(count => {
+      res.status(200).json(count);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        error: 'Failed to delete recipe'
+      });
+    });
+});
 module.exports = router;
